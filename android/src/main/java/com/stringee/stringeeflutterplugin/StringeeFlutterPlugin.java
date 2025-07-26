@@ -525,8 +525,14 @@ public class StringeeFlutterPlugin
             case "getMessagesAfter":
                 try {
                     Integer count = call.argument("count");
-                    Long seq = call.argument("seq");
-                    if (count != null && seq != null) {
+                    // Long seq = call.argument("seq");
+                    // if (count != null && seq != null) {
+                    // clientWrapper.conversation().getMessagesAfter(call.argument("convId"), seq,
+                    // count, result);
+                    // }
+                    Number seqNum = call.argument("seq");
+                    if (count != null && seqNum != null) {
+                        long seq = seqNum.longValue();
                         clientWrapper.conversation().getMessagesAfter(call.argument("convId"), seq, count, result);
                     }
                 } catch (Exception e) {
@@ -542,7 +548,7 @@ public class StringeeFlutterPlugin
                     // count, result);
                     // }
                     Number seqNum = call.argument("seq");
-                    if (seqNum != null) {
+                    if (count != null && seqNum != null) {
                         long seq = seqNum.longValue();
                         clientWrapper.conversation().getMessagesBefore(call.argument("convId"), seq,
                                 count, result);
